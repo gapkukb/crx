@@ -13,7 +13,8 @@ const manifest = defineManifest({
 		service_worker: "src/background.ts",
 		type: "module",
 	},
-	// content_scripts: [{ js: ["src/main.ts"], matches: ["https://*/*"] }],
+	permissions: ["tabs", "webRequest", "downloads"],
+	content_scripts: [{ js: ["src/utils/qrcode.ts"], matches: ["<all_urls>"], run_at: "document_start" }],
 });
 
 const port = 10010;
@@ -28,7 +29,7 @@ export default defineConfig({
 	},
 	build: {
 		rollupOptions: {
-			input: ["popup.html", "options.html", "offscreen.html"],
+			input: ["popup.html", "options.html"],
 		},
 	},
 	plugins: [
