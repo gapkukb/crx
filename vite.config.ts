@@ -13,7 +13,7 @@ const manifest = defineManifest({
 		service_worker: "src/background.ts",
 		type: "module",
 	},
-	permissions: ["tabs", "webRequest", "downloads"],
+	permissions: ["tabs", "webRequest", "downloads", "clipboardRead", "clipboardWrite"],
 	content_scripts: [{ js: ["src/utils/qrcode.ts"], matches: ["<all_urls>"], run_at: "document_start" }],
 });
 

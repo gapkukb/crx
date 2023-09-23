@@ -3,18 +3,18 @@ let id: number | undefined;
 chrome.tabs.onUpdated.addListener(async function (_, __, tab) {
 	if (tab.id === id) return;
 	id = tab.id;
-	// chrome.tabs.query({ active: true, currentWindow: true }, function ([tab]) {
-	// 	chrome.tabs.sendMessage(
-	// 		tab.id!,
-	// 		{
-	// 			offscreen: true,
-	// 			type: "qrcode",
-	// 		},
-	// 		function (response) {
-	// 			console.log(response);
-	// 		}
-	// 	);
-	// });
+	chrome.tabs.query({ active: true, currentWindow: true }, function ([tab]) {
+		chrome.tabs.sendMessage(
+			tab.id!,
+			{
+				offscreen: true,
+				type: "qrcode",
+			},
+			function (response) {
+				console.log(response);
+			}
+		);
+	});
 	// if (tab.url?.includes("maliprod.alipay.com")) {
 	// await chrome.runtime.sendMessage(
 	// 	{
