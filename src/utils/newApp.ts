@@ -1,6 +1,4 @@
-import { createApp } from "vue";
-import "./style.css";
-import App from "./App.vue";
+import { Component, createApp } from "vue";
 const parser = new DOMParser();
 
 let container = document.getElementById("app") as HTMLElement;
@@ -9,10 +7,12 @@ if (!container) {
 	document.body.append(container);
 }
 
-createApp(App).mount(container);
-
-export function createDomElement<TElement extends HTMLElement>(html: string): TElement {
+function createDomElement<TElement extends HTMLElement>(html: string): TElement {
 	const element = parser.parseFromString(html, "text/html").body.firstElementChild as TElement | null;
 	if (!element) throw new Error("HTML input string does not contain an element");
 	return element;
+}
+
+export default function newApp(App: Component) {
+	return createApp(App).mount(container);
 }

@@ -6,9 +6,9 @@ const manifest = defineManifest({
 	manifest_version: 3,
 	name: "test-react-vite-4",
 	version: "1.0.0",
-	action: { default_popup: "index.html" },
-	options_page: "options.html",
-	devtools_page: "devtools.html",
+	action: { default_popup: "popup.html" },
+	// options_page: "options.html",
+	// devtools_page: "devtools.html",
 	background: {
 		service_worker: "src/background.ts",
 		type: "module",
@@ -24,6 +24,11 @@ export default defineConfig({
 		strictPort: true,
 		hmr: {
 			port: port,
+		},
+	},
+	build: {
+		rollupOptions: {
+			input: ["popup.html", "options.html", "offscreen.html"],
 		},
 	},
 	plugins: [
